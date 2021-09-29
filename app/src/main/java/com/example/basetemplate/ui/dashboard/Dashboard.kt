@@ -37,7 +37,7 @@ class Dashboard:BaseFragment<DashboardViewModel>() {
 
          homeViewModel.userList.observe(this,{
              users.addAll(it)
-             adpater.notifyDataSetChanged()
+             adpater.differ.submitList(users)
          })
 
          viewModel.data.observe(this){

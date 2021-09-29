@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.example.basetemplate.R
 import com.example.basetemplate.ui.base.BaseAdapter
 
-class UserAdapter(private val list:ArrayList<String>) : BaseAdapter<String,UserViewHolder> (list){
+class UserAdapter(private val list:ArrayList<String>) : BaseAdapter<String,UserItemViewModel<String>,UserViewHolder> (list){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
         UserViewHolder(
             LayoutInflater.from(parent.context)
