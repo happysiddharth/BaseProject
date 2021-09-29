@@ -1,4 +1,3 @@
-package com.mindorks.bootcamp.instagram.utils.log
 
 import timber.log.Timber
 

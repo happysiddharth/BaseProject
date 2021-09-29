@@ -1,6 +1,7 @@
 package com.example.basetemplate.di.component
 
 import com.example.basetemplate.di.module.FragmentModule
+import com.example.basetemplate.ui.dashboard.Dashboard
 import dagger.Component
 
 @Component(
@@ -9,4 +10,5 @@ import dagger.Component
     ]
 )
 interface FragmentComponent {
+    fun inject(dashboard: Dashboard)
 }

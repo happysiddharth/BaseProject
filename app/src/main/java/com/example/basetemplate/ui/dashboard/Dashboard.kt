@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basetemplate.R
+import com.example.basetemplate.di.component.FragmentComponent
 import com.example.basetemplate.ui.base.BaseFragment
 import com.example.basetemplate.ui.home.HomeViewModel
+import kotlinx.android.synthetic.main.dashboard.*
 
-class Dashboard:BaseFragment() {
+class Dashboard:BaseFragment<DashboardViewModel>() {
     private val users = ArrayList<String>()
     private lateinit var rv : RecyclerView
     private lateinit  var adpater:UserAdapter
@@ -38,9 +40,16 @@ class Dashboard:BaseFragment() {
              adpater.notifyDataSetChanged()
          })
 
+         viewModel.data.observe(this){
+             text2.text = it
+         }
+
 
     }
 
 
     override fun getResourceId(): Int = R.layout.dashboard
+    override fun injectDependencies(fragmentComponent: FragmentComponent) {
+        fragmentComponent.inject(this)
+    }
 }

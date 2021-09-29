@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.example.basetemplate.di.component.DaggerFragmentComponent
@@ -13,6 +14,7 @@ import com.example.basetemplate.di.module.FragmentModule
 import javax.inject.Inject
 
 abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
+
     @Inject
     protected lateinit var viewModel: VM
 
@@ -26,7 +28,6 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpView(view)
         setObservers(view)
-
     }
 
     override fun onCreateView(
@@ -39,7 +40,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     private fun buildFragmentComponent() =
         DaggerFragmentComponent
             .builder()
-            .fragmentModule(FragmentModule())
+            .fragmentModule(FragmentModule(this))
             .build()
 
 
@@ -55,6 +56,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     }
 
     abstract fun setUpView(view: View)
+    @LayoutRes
     abstract fun getResourceId(): Int
     abstract fun setObservers(view: View)
     abstract fun injectDependencies(fragmentComponent: FragmentComponent)
