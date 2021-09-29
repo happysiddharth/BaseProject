@@ -11,6 +11,8 @@ abstract class BaseFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView(view)
+        setObservers(view)
+
     }
 
     override fun onCreateView(
@@ -22,4 +24,6 @@ abstract class BaseFragment : Fragment(){
     }
     abstract fun setUpView(view: View)
     abstract fun getResourceId():Int
+    abstract fun setObservers(view: View)
+
 }

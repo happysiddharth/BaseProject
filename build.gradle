@@ -16,3 +16,30 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext{
+
+    // Reactive
+    rxjava_version = '2.2.3'
+    rxandroid_version = '2.1.0'
+
+    // Image
+    glide_version = '4.8.0'
+
+    // Parser
+    gson_version = '2.8.5'
+
+    // Logging
+    timber_version = '4.7.1'
+
+    // DB
+    room_version = '2.0.0'
+    debug_db_version = '1.0.6'
+
+    // Networking
+    retrofit_version = '2.4.0'
+    okhttp_version = '3.11.0'
+
+    // Dagger
+    dagger_version = '2.21'
+}

@@ -10,11 +10,15 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutId())
         setupView(savedInstanceState)
+        setObservers()
+
     }
 
     protected abstract fun provideLayoutId():Int
 
     protected abstract fun setupView(savedInstanceState: Bundle?)
+
+    protected abstract fun setObservers()
 
     protected fun showToast(message:String){
         Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
