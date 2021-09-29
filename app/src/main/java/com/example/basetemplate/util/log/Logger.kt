@@ -1,9 +1,12 @@
 
+import com.example.basetemplate.BuildConfig
 import timber.log.Timber
 
 object Logger {
 
-
+    init {
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+    }
 
     fun d(tag: String, s: String, vararg params: Any) =
         Timber.tag(tag).d(s, params)

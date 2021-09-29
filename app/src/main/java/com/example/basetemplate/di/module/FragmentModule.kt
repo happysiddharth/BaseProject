@@ -14,9 +14,11 @@ import dagger.Provides
 class FragmentModule(private val fragment:BaseFragment<*>) {
 
     @Provides
-    fun providesDashboardViewModel():DashboardViewModel =
+    fun providesDashboardViewModel(
+        networkHelper: NetworkHelper
+    ):DashboardViewModel =
         ViewModelProviders.of(fragment,
         ViewModelFactory(DashboardViewModel::class){
-            DashboardViewModel(NetworkHelper(fragment.requireContext()))
+            DashboardViewModel(networkHelper)
         }).get(DashboardViewModel::class.java)
 }

@@ -27,6 +27,7 @@ class HomeActivity : BaseActivity<HomeViewModel>() {
     override fun setObservers() {
         viewModel.title.observe(this,{
             showToast(it)
+            Logger.e("TAG",it)
             findViewById<TextView>(R.id.text).text = it
         })
 

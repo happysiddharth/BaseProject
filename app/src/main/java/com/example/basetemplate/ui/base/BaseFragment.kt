@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import com.example.basetemplate.MyApplication
 import com.example.basetemplate.di.component.DaggerFragmentComponent
 import com.example.basetemplate.di.component.FragmentComponent
 import com.example.basetemplate.di.module.FragmentModule
@@ -40,6 +41,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     private fun buildFragmentComponent() =
         DaggerFragmentComponent
             .builder()
+            .applicationComponent((activity?.application as MyApplication).applicationComponent)
             .fragmentModule(FragmentModule(this))
             .build()
 

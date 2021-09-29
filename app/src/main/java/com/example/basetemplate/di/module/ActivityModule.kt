@@ -13,12 +13,14 @@ import dagger.Provides
 class ActivityModule(private val activity:BaseActivity<*>) {
 
     @Provides
-    fun providesHomeViewModel():HomeViewModel{
+    fun providesHomeViewModel(
+        networkHelper: NetworkHelper
+    ):HomeViewModel{
         return ViewModelProviders.of(activity,
             ViewModelFactory(
                 HomeViewModel::class
             ) {
-                HomeViewModel(NetworkHelper(activity), UsersRepository())
+                HomeViewModel(networkHelper, UsersRepository())
             }
         ).get(HomeViewModel::class.java)
 

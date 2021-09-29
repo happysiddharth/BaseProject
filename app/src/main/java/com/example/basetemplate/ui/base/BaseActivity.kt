@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import com.example.basetemplate.MyApplication
 import com.example.basetemplate.di.component.ActivityComponent
 import com.example.basetemplate.di.component.DaggerActivityComponent
 import com.example.basetemplate.di.module.ActivityModule
@@ -37,6 +38,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     private fun buildActivityComponent() =
         DaggerActivityComponent
             .builder()
+            .applicationComponent((application as MyApplication).applicationComponent)
             .activityModule(ActivityModule(this))
             .build()
 
