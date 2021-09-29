@@ -4,10 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import com.example.basetemplate.R
+import com.example.basetemplate.di.component.DaggerFragmentComponent
+import com.example.basetemplate.di.component.FragmentComponent
+import com.example.basetemplate.di.module.FragmentModule
+import javax.inject.Inject
 
-abstract class BaseFragment : Fragment(){
+abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
+    @Inject
+    protected lateinit var viewModel: VM
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        injectDependencies(buildFragmentComponent())
+        super.onCreate(savedInstanceState)
+        viewModel.onCreate()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView(view)
@@ -19,11 +33,30 @@ abstract class BaseFragment : Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(getResourceId(), container, false)
+    ): View? = inflater.inflate(getResourceId(), container, false)
+
+
+    private fun buildFragmentComponent() =
+        DaggerFragmentComponent
+            .builder()
+            .fragmentModule(FragmentModule())
+            .build()
+
+
+    protected fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
+    protected fun showToast(@StringRes resId: Int) {
+        Toast.makeText(context, getString(resId), Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showSnackBar(message: String) {
+    }
+
     abstract fun setUpView(view: View)
-    abstract fun getResourceId():Int
+    abstract fun getResourceId(): Int
     abstract fun setObservers(view: View)
+    abstract fun injectDependencies(fragmentComponent: FragmentComponent)
 
 }

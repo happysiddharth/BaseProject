@@ -5,8 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.basetemplate.repo.UsersRepository
+import com.example.basetemplate.ui.base.BaseViewModel
+import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
 
-class HomeViewModel(val usersRepository: UsersRepository) : ViewModel() {
+class HomeViewModel(networkHelper: NetworkHelper,val usersRepository: UsersRepository)
+    : BaseViewModel(networkHelper) {
 
 
     private val _title = MutableLiveData<String>()
@@ -21,6 +24,10 @@ class HomeViewModel(val usersRepository: UsersRepository) : ViewModel() {
 
     fun fetUsers(){
         _userList.postValue(usersRepository.fetUser())
+    }
+
+    override fun onCreate() {
+
     }
 
 

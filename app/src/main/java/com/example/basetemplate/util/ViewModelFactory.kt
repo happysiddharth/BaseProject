@@ -10,8 +10,11 @@ class ViewModelFactory<T:ViewModel> (
     // when creator lambda is called then that module creates and return the instance of ViewModel
         ):ViewModelProvider.NewInstanceFactory() {
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return creator() as T
+        if (modelClass.isAssignableFrom(kClass.java))
+            return creator() as T
+        throw IllegalAccessException("Unknown class name")
 
     }
 }

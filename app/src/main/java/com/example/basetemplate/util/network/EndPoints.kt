@@ -1,4 +1,4 @@
-package com.example.basetemplate.network
+package com.example.basetemplate.util.network
 
 object EndPoints {
     const val getUsers = "user"
