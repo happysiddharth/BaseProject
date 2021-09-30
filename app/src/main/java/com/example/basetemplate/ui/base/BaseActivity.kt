@@ -51,6 +51,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         Toast.makeText(applicationContext, getString(resId), Toast.LENGTH_SHORT).show()
     }
 
-    protected fun showSnackbar(message: String) {
+    protected fun showSnackBar(message: String) {
     }
 }

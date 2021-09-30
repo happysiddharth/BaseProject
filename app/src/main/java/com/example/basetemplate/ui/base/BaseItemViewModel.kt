@@ -9,7 +9,7 @@ abstract class BaseItemViewModel<T:Any>(
     val data = MutableLiveData<T>()
 
     fun onManualCleared() = onCleared()
-    fun updateData(data:T){
+    open fun updateData(data:T){
         this.data.postValue(data)
     }
 

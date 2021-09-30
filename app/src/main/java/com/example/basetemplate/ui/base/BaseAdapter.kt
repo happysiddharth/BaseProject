@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 //Generic class ->  we can pass data type as a variable
-abstract class BaseAdapter<T:Any,VM:BaseItemViewModel<T>,VH:BaseItemViewHolder<T,VM>>(
+abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T>>>(
     private val dataList:ArrayList<T>,
     private val parentLifeCycle:Lifecycle
 ) : RecyclerView.Adapter<VH>() {
@@ -36,7 +36,6 @@ abstract class BaseAdapter<T:Any,VM:BaseItemViewModel<T>,VH:BaseItemViewHolder<T
                 }
                 @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
                 fun onParentStop(){
-                   Logger.e("TAG","onstoped")
                     recyclerView?.runCatching{
                         if(layoutManager is LinearLayoutManager){
                             val first = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
@@ -44,7 +43,7 @@ abstract class BaseAdapter<T:Any,VM:BaseItemViewModel<T>,VH:BaseItemViewHolder<T
                             if (first in 0..last){
                                 for (i in first..last){
                                     findViewHolderForAdapterPosition(i)?.let{
-                                        (it as BaseItemViewHolder<*,*>).onStart()
+                                        (it as BaseItemViewHolder<*,*>).onStop()
                                     }
                                 }
                             }
