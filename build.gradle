@@ -19,6 +19,7 @@ task clean(type: Delete) {
 
 ext{
 
+    kotlin_version = "1.5.10"
     // Reactive
     rxjava_version = '2.2.3'
     rxandroid_version = '2.1.0'

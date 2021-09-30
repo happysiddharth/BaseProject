@@ -10,6 +10,7 @@ import com.example.basetemplate.repo.UsersRepository
 import com.example.basetemplate.ui.base.BaseActivity
 import com.example.basetemplate.ui.dashboard.Dashboard
 import com.example.basetemplate.util.ViewModelFactory
+import com.example.basetemplate.util.log.Logger
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
 
 class HomeActivity : BaseActivity<HomeViewModel>() {

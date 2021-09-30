@@ -1,3 +1,4 @@
+package com.example.basetemplate.util.log
 
 import com.example.basetemplate.BuildConfig
 import timber.log.Timber

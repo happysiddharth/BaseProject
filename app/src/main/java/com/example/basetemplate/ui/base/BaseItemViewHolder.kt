@@ -37,7 +37,7 @@ abstract class BaseItemViewHolder<T:Any,VM:BaseItemViewModel<T>>(
         setUpView(view)
     }
 
-    fun onStarted(){
+    fun onStart(){
         lifeCycleRegistry.markState(Lifecycle.State.STARTED)
         lifeCycleRegistry.markState(Lifecycle.State.RESUMED)
     }
@@ -50,9 +50,7 @@ abstract class BaseItemViewHolder<T:Any,VM:BaseItemViewModel<T>>(
     }
 
 
-    protected fun setUpObservers(){
-
-    }
+    abstract fun setUpObservers()
 
     private fun buildViewHolderDaggerComponent()=
             DaggerViewHolderComponent

@@ -22,7 +22,7 @@ class Dashboard:BaseFragment<DashboardViewModel>() {
     override fun setUpView(view: View) {
 
         rv = view.findViewById(R.id.users)
-        adpater = UserAdapter(users);
+        adpater = UserAdapter(users,this);
         rv.adapter = adpater;
         rv.layoutManager = LinearLayoutManager(context)
 
