@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.basetemplate.MyApplication
 import com.example.basetemplate.di.component.DaggerFragmentComponent
 import com.example.basetemplate.di.component.FragmentComponent
@@ -21,6 +22,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies(buildFragmentComponent())
+        setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
         viewModel.onCreate()
     }
@@ -45,7 +47,6 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
             .fragmentModule(FragmentModule(this))
             .build()
 
-
     protected fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
@@ -57,10 +58,19 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     protected fun showSnackBar(message: String) {
     }
 
+    protected open fun setObservers(view: View){
+        viewModel.messageString.observe(this, {
+            it.data?.run { showToast(this) }
+        })
+
+        viewModel.messageStringId.observe(this, {
+            it.data?.run { showToast(this) }
+        })
+    }
+
     abstract fun setUpView(view: View)
     @LayoutRes
     abstract fun getResourceId(): Int
-    abstract fun setObservers(view: View)
     abstract fun injectDependencies(fragmentComponent: FragmentComponent)
 
 }

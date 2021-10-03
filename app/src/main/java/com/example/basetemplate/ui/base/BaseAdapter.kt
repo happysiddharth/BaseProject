@@ -23,7 +23,7 @@ abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T
             object : LifecycleObserver{
                 @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                 fun onParentDestroy(){
-                    recyclerView?.runCatching{
+                    recyclerView?.run{
                         for (i in 0 until childCount){
                             getChildAt(i).let{
                                 (getChildViewHolder(it) as BaseItemViewHolder<*,*>).run{
@@ -36,7 +36,7 @@ abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T
                 }
                 @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
                 fun onParentStop(){
-                    recyclerView?.runCatching{
+                    recyclerView?.run{
                         if(layoutManager is LinearLayoutManager){
                             val first = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                             val last = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
@@ -53,7 +53,7 @@ abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T
 
                 @OnLifecycleEvent(Lifecycle.Event.ON_START)
                 fun onParentStart(){
-                    recyclerView?.runCatching{
+                    recyclerView?.run{
                         for (i in 0 until childCount){
                             getChildAt(i).let{
                                 (getChildViewHolder(it) as BaseItemViewHolder<*,*>).run{
@@ -67,21 +67,21 @@ abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T
         )
     }
 
-    private val callBack = object : DiffUtil.ItemCallback<T>() {
-
-        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem.equals(newItem)
-        }
-    }
-    val differ = AsyncListDiffer(this, callBack)
-    override fun getItemCount(): Int = differ.currentList.size
+//    private val callBack = object : DiffUtil.ItemCallback<T>() {
+//
+//        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
+//            return oldItem == newItem
+//        }
+//
+//        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
+//            return oldItem == (newItem)
+//        }
+//    }
+//    val differ = AsyncListDiffer(this, callBack)
+    override fun getItemCount(): Int =dataList.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.setData(data = differ.currentList[position])
+        holder.setData(data = dataList[position])
     }
 
     override fun onViewAttachedToWindow(holder: VH) {

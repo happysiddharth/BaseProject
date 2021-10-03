@@ -1,14 +1,17 @@
 package com.example.basetemplate.ui.base
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.basetemplate.MyApplication
 import com.example.basetemplate.di.component.ActivityComponent
 import com.example.basetemplate.di.component.DaggerActivityComponent
 import com.example.basetemplate.di.module.ActivityModule
+import com.example.basetemplate.util.log.Logger
 import javax.inject.Inject
 
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
@@ -23,7 +26,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         viewModel.onCreate()
         setupView(savedInstanceState)
         setObservers()
-
     }
 
     @LayoutRes
@@ -31,9 +33,24 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     protected abstract fun setupView(savedInstanceState: Bundle?)
 
-    protected abstract fun setObservers()
+    protected open fun setObservers(){
+        viewModel.messageString.observe(this, Observer {
+            it.data?.run { showToast(this) }
+        })
+
+        viewModel.messageStringId.observe(this, Observer {
+            it.data?.run { showToast(this) }
+        })
+    }
 
     protected abstract fun injectDependencies(activityComponent: ActivityComponent)
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount>0){
+            supportFragmentManager.popBackStackImmediate()
+        }else
+            super.onBackPressed()
+    }
 
     private fun buildActivityComponent() =
         DaggerActivityComponent

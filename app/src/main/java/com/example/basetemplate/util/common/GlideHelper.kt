@@ -9,7 +9,6 @@ object GlideHelper {
         val builder = LazyHeaders.Builder()
         for (entry in headers.entries)
             builder.addHeader(entry.key, entry.value)
-
         return GlideUrl(url, builder.build())
     }
 }

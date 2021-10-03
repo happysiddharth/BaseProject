@@ -9,6 +9,7 @@ import com.example.basetemplate.MyApplication
 import com.example.basetemplate.di.component.DaggerViewHolderComponent
 import com.example.basetemplate.di.component.ViewHolderComponent
 import com.example.basetemplate.di.module.ViewHolderModule
+import com.example.basetemplate.util.log.Logger
 import javax.inject.Inject
 
 abstract class BaseItemViewHolder<T:Any,VM:BaseItemViewModel<T>>(
