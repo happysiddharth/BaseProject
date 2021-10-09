@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import com.example.basetemplate.R
 import com.example.basetemplate.util.common.Resource
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
+import io.reactivex.disposables.CompositeDisposable
 import javax.net.ssl.HttpsURLConnection
 
 abstract class BaseViewModel(
-    private val networkHelper: NetworkHelper
-):ViewModel() {
+    private val networkHelper: NetworkHelper,
+    private val compositeDisposable: CompositeDisposable,
+    ):ViewModel() {
 
     val messageStringId: MutableLiveData<Resource<Int>> = MutableLiveData()
     val messageString: MutableLiveData<Resource<String>> = MutableLiveData()
@@ -44,6 +46,7 @@ abstract class BaseViewModel(
         }
 
     override fun onCleared() {
+        compositeDisposable.dispose()
         super.onCleared()
     }
     protected open fun forcedLogoutUser() {

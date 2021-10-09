@@ -1,60 +1,56 @@
 package com.example.basetemplate.ui.dashboard
 
-import android.Manifest
-import android.database.Cursor
-import android.net.Uri
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basetemplate.R
-import com.example.basetemplate.data.model.Users
+import com.example.basetemplate.data.model.SMS
+import com.example.basetemplate.data.repository.UsersRepository
 import com.example.basetemplate.di.component.FragmentComponent
 import com.example.basetemplate.ui.base.BaseFragment
 import com.example.basetemplate.ui.dashboard.users.UserAdapter
 import com.example.basetemplate.ui.home.HomeViewModel
-import com.example.basetemplate.util.log.Logger
-import javax.inject.Inject
-import androidx.core.app.ActivityCompat
-
-import android.content.pm.PackageManager
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.ContextMenu
-import android.view.Menu
-import android.view.MenuInflater
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import com.example.basetemplate.data.model.SMS
 import kotlinx.android.synthetic.main.dashboard.*
-import kotlinx.coroutines.*
+import javax.inject.Inject
 
 
-class Dashboard:BaseFragment<DashboardViewModel>() {
+class Dashboard : BaseFragment<DashboardViewModel>() {
     private val users = ArrayList<SMS>()
-    private lateinit var rv : RecyclerView
-    private lateinit  var adpater: UserAdapter
+    private lateinit var rv: RecyclerView
+    private lateinit var adpater: UserAdapter
+
     @Inject
     lateinit var linearLayoutManager: LinearLayoutManager
-    companion object{
+
+    companion object {
         const val TAG = "Dashboard"
     }
-    private lateinit var homeViewModel:HomeViewModel
+
+    private lateinit var homeViewModel: HomeViewModel
     override fun setUpView(view: View) {
         rv = view.findViewById(R.id.users)
-        adpater = UserAdapter(users,this);
+        adpater = UserAdapter(users, this)
         rv.layoutManager = linearLayoutManager
         rv.adapter = adpater
     }
 
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.readSMS()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu_home, menu)
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "SMS"
         val search = menu.findItem(R.id.search)
         val searchView = search.actionView as SearchView
-        Logger.e(TAG,searchView.toString())
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.queryHint = "SMS"
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -66,31 +62,29 @@ class Dashboard:BaseFragment<DashboardViewModel>() {
 
         })
 
-
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 
 
-     override fun setObservers(view: View) {
-         super.setObservers(view)
-         viewModel.colName.observe(this){
-             users.clear()
-             users.addAll(it)
-             adpater.notifyDataSetChanged()
-             rv.scrollToPosition(0)
-         }
-         viewModel.loading.observe(this){
-             if (it){
-                 progress_circular.visibility = View.VISIBLE
+    override fun setObservers(view: View) {
+        super.setObservers(view)
+        viewModel.colName.observe(this) {
+            users.clear()
+            users.addAll(it)
+            adpater.notifyDataSetChanged()
+            rv.scrollToPosition(0)
+        }
+        viewModel.loading.observe(this) {
+            if (it) {
+                progress_circular.visibility = View.VISIBLE
 
-             }else{
-                 progress_circular.visibility = View.GONE
-             }
-         }
+            } else {
+                progress_circular.visibility = View.GONE
+            }
+        }
 
 
-     }
+    }
 
 
     override fun getResourceId(): Int = R.layout.dashboard

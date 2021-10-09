@@ -53,7 +53,7 @@ abstract class BaseItemViewHolder<T:Any,VM:BaseItemViewModel<T>>(
 
     abstract fun setUpObservers()
 
-    private fun buildViewHolderDaggerComponent()=
+    private fun buildViewHolderDaggerComponent() =
             DaggerViewHolderComponent
             .builder()
             .applicationComponent((itemView.context.applicationContext as MyApplication).applicationComponent)

@@ -10,6 +10,7 @@ import com.example.basetemplate.util.ViewModelFactory
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 
 @Module
 class FragmentModule(private val fragment:BaseFragment<*>) {
@@ -19,11 +20,12 @@ class FragmentModule(private val fragment:BaseFragment<*>) {
     @Provides
     fun providesDashboardViewModel(
         networkHelper: NetworkHelper,
-        smsRepository: SMSRepository
+        smsRepository: SMSRepository,
+        compositeDisposable: CompositeDisposable
     ):DashboardViewModel =
         ViewModelProviders.of(fragment,
         ViewModelFactory(DashboardViewModel::class){
-            DashboardViewModel(networkHelper,fragment.requireActivity(),smsRepository)
+            DashboardViewModel(networkHelper,fragment.requireActivity(),smsRepository,compositeDisposable)
         }).get(DashboardViewModel::class.java)
 
     @Provides

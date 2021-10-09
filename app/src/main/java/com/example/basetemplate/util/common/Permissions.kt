@@ -13,7 +13,6 @@ object Permissions  {
         permissions.forEach{permission->
             if (!checkPermission(activity,permission)){
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.READ_SMS)){
-                    Logger.d("Sidd","dont")
                 }else{
                     ActivityCompat.requestPermissions(activity, arrayOf(permission), 100)
                 }

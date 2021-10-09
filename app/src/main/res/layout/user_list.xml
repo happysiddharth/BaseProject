@@ -5,17 +5,26 @@
     android:layout_margin="10dp">
 
  <RelativeLayout
+     android:id="@+id/smsCard"
      android:padding="10dp"
      android:layout_width="match_parent"
      android:layout_height="wrap_content">
      <TextView
          android:textSize="20sp"
          android:id="@+id/sender"
+         android:layout_marginStart="10dp"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"/>
+     <ImageView
+         android:layout_width="5dp"
+         android:layout_height="5dp"
+         android:id="@+id/unread"
+         android:src="@drawable/unread_indicator"
+         android:layout_margin="10dp"
+         android:layout_alignParentRight="true"/>
      <TextView
          android:id="@+id/userName"
-         android:layout_toEndOf="@id/sender"
+         android:layout_below="@id/sender"
          android:textSize="20sp"
          android:layout_marginStart="10dp"
          android:textColor="@color/black"

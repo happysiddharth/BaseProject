@@ -6,8 +6,10 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import com.example.basetemplate.MyApplication
+import com.example.basetemplate.R
 import com.example.basetemplate.di.component.ActivityComponent
 import com.example.basetemplate.di.component.DaggerActivityComponent
 import com.example.basetemplate.di.module.ActivityModule
@@ -23,6 +25,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         injectDependencies(buildActivityComponent())
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutId())
+        setSupportActionBar(setUpToolBar())
         viewModel.onCreate()
         setupView(savedInstanceState)
         setObservers()
@@ -32,6 +35,10 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     protected abstract fun provideLayoutId(): Int
 
     protected abstract fun setupView(savedInstanceState: Bundle?)
+
+    protected abstract fun injectDependencies(activityComponent: ActivityComponent)
+
+    protected abstract fun setUpToolBar(): Toolbar
 
     protected open fun setObservers(){
         viewModel.messageString.observe(this, Observer {
@@ -43,7 +50,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         })
     }
 
-    protected abstract fun injectDependencies(activityComponent: ActivityComponent)
+
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount>0){

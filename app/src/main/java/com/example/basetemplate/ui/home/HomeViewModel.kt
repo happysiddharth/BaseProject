@@ -6,9 +6,12 @@ import com.example.basetemplate.data.model.Users
 import com.example.basetemplate.data.repository.UsersRepository
 import com.example.basetemplate.ui.base.BaseViewModel
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
+import io.reactivex.disposables.CompositeDisposable
 
-class HomeViewModel(networkHelper: NetworkHelper,val usersRepository: UsersRepository)
-    : BaseViewModel(networkHelper) {
+class HomeViewModel(networkHelper: NetworkHelper,
+                    val usersRepository: UsersRepository,
+                    compositeDisposable: CompositeDisposable)
+    : BaseViewModel(networkHelper,compositeDisposable) {
 
 
     private val _title = MutableLiveData<String>()

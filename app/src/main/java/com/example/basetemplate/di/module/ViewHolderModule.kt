@@ -11,4 +11,5 @@ class ViewHolderModule(
 ) {
     @Provides
     fun provideLifeCycleRegistry() = LifecycleRegistry(viewHolder)
+
 }

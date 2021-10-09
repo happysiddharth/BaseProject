@@ -1,5 +1,9 @@
 package com.example.basetemplate.util.common
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
 import java.util.*
 
 object TimeUtils {
@@ -28,7 +32,8 @@ object TimeUtils {
         } else if (diff < 48 * HOUR_MILLIS) {
             "yesterday"
         } else {
-            "${diff / DAY_MILLIS} days ago"
+
+            "${SimpleDateFormat("dd-MMM-yyyy").format(date.time)} "
         }
     }
 }
