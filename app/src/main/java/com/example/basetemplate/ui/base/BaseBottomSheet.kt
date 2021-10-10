@@ -1,6 +1,7 @@
 package com.example.basetemplate.ui.base
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,7 @@ abstract class BaseBottomSheet : BottomSheetDialogFragment() {
         setView(view)
 
     }
+
 
     @LayoutRes
     abstract fun getLayoutId():Int

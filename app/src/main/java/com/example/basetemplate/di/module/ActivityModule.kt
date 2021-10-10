@@ -1,10 +1,8 @@
 package com.example.basetemplate.di.module
 
-import android.app.Activity
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.basetemplate.data.repository.UsersRepository
+import com.example.basetemplate.data.repository.MediaRepository
 import com.example.basetemplate.di.ActivityScope
 import com.example.basetemplate.di.ViewHolderScope
 import com.example.basetemplate.ui.base.BaseActivity
@@ -25,14 +23,13 @@ class ActivityModule(private val activity:BaseActivity<*>) {
     @Provides
     fun providesHomeViewModel(
         networkHelper: NetworkHelper,
-        usersRepository: UsersRepository,
         compositeDisposable: CompositeDisposable
     ):HomeViewModel{
         return ViewModelProviders.of(activity,
             ViewModelFactory(
                 HomeViewModel::class
             ) {
-                HomeViewModel(networkHelper,usersRepository,compositeDisposable )
+                HomeViewModel(networkHelper,compositeDisposable )
             }
         ).get(HomeViewModel::class.java)
 

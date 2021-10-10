@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboard"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_sms_24"
+        android:title="SMS"/>
+    <item
+        android:id="@+id/gallery"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_image_24"
+        android:title="Gallery"/>
+</menu>

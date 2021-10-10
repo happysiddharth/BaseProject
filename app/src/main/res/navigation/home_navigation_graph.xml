@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_navigation_graph"
+    app:startDestination="@id/dashboard">
+
+    <fragment
+        android:id="@+id/gallery"
+        android:name="com.example.basetemplate.ui.gallery.Gallery"
+        android:label="Gallery" />
+    <fragment
+        android:id="@+id/dashboard"
+        android:name="com.example.basetemplate.ui.dashboard.Dashboard"
+        android:label="Dashboard" />
+</navigation>

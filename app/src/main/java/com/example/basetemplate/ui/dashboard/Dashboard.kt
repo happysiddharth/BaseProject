@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basetemplate.R
 import com.example.basetemplate.data.model.SMS
-import com.example.basetemplate.data.repository.UsersRepository
 import com.example.basetemplate.di.component.FragmentComponent
 import com.example.basetemplate.ui.base.BaseFragment
-import com.example.basetemplate.ui.dashboard.users.UserAdapter
+import com.example.basetemplate.ui.dashboard.sms.UserAdapter
 import com.example.basetemplate.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.dashboard.*
 import javax.inject.Inject

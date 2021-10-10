@@ -2,10 +2,10 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/smsCard"
     android:layout_margin="10dp">
 
  <RelativeLayout
-     android:id="@+id/smsCard"
      android:padding="10dp"
      android:layout_width="match_parent"
      android:layout_height="wrap_content">

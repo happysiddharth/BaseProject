@@ -21,7 +21,7 @@ class SMSRepository @Inject constructor(
             val temp = ArrayList<SMS>()
             val cursor = activity.contentResolver
                 .query(
-                    Uri.parse(SMS_CONTENT_PROVIDER),
+                    Telephony.Sms.CONTENT_URI,
                     arrayOf(
                         Telephony.Sms._ID,
                         Telephony.Sms.BODY,
