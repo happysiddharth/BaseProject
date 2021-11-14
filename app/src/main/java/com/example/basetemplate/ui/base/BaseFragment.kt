@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import com.example.basetemplate.MyApplication
 import com.example.basetemplate.di.component.DaggerFragmentComponent
 import com.example.basetemplate.di.component.FragmentComponent
 import com.example.basetemplate.di.module.FragmentModule
+import com.example.basetemplate.util.log.Logger
 import javax.inject.Inject
 
 abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
@@ -58,6 +60,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     protected fun showSnackBar(message: String) {
     }
 
+    @CallSuper
     protected open fun setObservers(view: View){
         viewModel.messageString.observe(this, {
             it.data?.run { showToast(this) }
@@ -69,6 +72,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     }
 
     abstract fun setUpView(view: View)
+
     @LayoutRes
     abstract fun getResourceId(): Int
     abstract fun injectDependencies(fragmentComponent: FragmentComponent)

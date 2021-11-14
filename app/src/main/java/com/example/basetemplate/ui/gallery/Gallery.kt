@@ -18,8 +18,9 @@ class Gallery : BaseFragment<GallaryViewModel>() {
     companion object{
         const val TAG = "Gallery"
     }
+
     private lateinit var imagesAdapter:ImagesAdapter
-    private val uriList:ArrayList<Uri> = ArrayList();
+    private val uriList:ArrayList<Uri> = ArrayList()
 
     @Inject
     lateinit var gridLayoutManager: GridLayoutManager

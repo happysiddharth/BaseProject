@@ -10,4 +10,6 @@ data class SMS(
     val thread:String?,
     val creator:String?,
     val read:Int?,
+    //configuration data
+    val cardColor:Int?,
 ):Serializable

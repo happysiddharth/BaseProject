@@ -1,25 +1,22 @@
-package com.example.basetemplate.ui.dashboard
+package com.example.basetemplate.ui.sms
 
-import android.annotation.SuppressLint
 import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.basetemplate.data.model.SMS
 import com.example.basetemplate.data.repository.SMSRepository
 import com.example.basetemplate.ui.base.BaseViewModel
 import com.example.basetemplate.util.common.Resource
-import com.example.basetemplate.util.log.Logger
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 
-class DashboardViewModel(
+class SmsViewModel(
     networkHelper: NetworkHelper,
     private val activity: Activity,
     private val smsRepository: SMSRepository,
@@ -68,13 +65,14 @@ class DashboardViewModel(
     fun initSearchSMS() {
         compositeDisposable.addAll(
             searchObservable
+                .subscribeOn(Schedulers.io())
                 .debounce(400, TimeUnit.MILLISECONDS)
                 .skip(1)
                 .distinctUntilChanged()
                 .switchMap { query ->
                     smsRepository.searchSMS(query)
+                        .subscribeOn(Schedulers.io())
                 }
-                .subscribeOn(Schedulers.io())
                 .subscribe({ list ->
                     _colName.value?.clear()
                     _colName.postValue(list)

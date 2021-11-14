@@ -1,26 +1,25 @@
 package com.example.basetemplate.ui.base
 
-import android.annotation.SuppressLint
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
-import com.example.basetemplate.util.log.*
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
-//Generic class ->  we can pass data type as a variable
-abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T>>>(
+abstract class BasePagingAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T>>>(
     private val dataList:ArrayList<T>,
-    private val parentLifeCycle:Lifecycle
-) : RecyclerView.Adapter<VH>() {
+    private val parentLifeCycle: Lifecycle,
+    diffCallback: DiffUtil.ItemCallback<T>,
+): PagingDataAdapter<T, VH>(diffCallback) {
 
-    private var recyclerView:RecyclerView ?= null
+    private var recyclerView: RecyclerView?= null
     init {
         parentLifeCycle.addObserver(
-            object : LifecycleObserver{
+            object : LifecycleObserver {
                 @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
                 fun onParentDestroy(){
                     recyclerView?.run{
@@ -67,18 +66,6 @@ abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T
         )
     }
 
-//    private val callBack = object : DiffUtil.ItemCallback<T>() {
-//
-//        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-//            return oldItem == newItem
-//        }
-//
-//        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-//            return oldItem == (newItem)
-//        }
-//    }
-//    val differ = AsyncListDiffer(this, callBack)
-    override fun getItemCount(): Int =dataList.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.setData(data = dataList[position])
@@ -103,6 +90,5 @@ abstract class BaseAdapter<T:Any,VH:BaseItemViewHolder<T,out BaseItemViewModel<T
         super.onDetachedFromRecyclerView(recyclerView)
         this.recyclerView = null
     }
-
 
 }

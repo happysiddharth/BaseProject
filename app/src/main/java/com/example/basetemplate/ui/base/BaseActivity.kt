@@ -3,6 +3,7 @@ package com.example.basetemplate.ui.base
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     protected abstract fun setUpToolBar(): Toolbar
 
+    @CallSuper
     protected open fun setObservers(){
         viewModel.messageString.observe(this, Observer {
             it.data?.run { showToast(this) }

@@ -1,18 +1,12 @@
-package com.example.basetemplate.ui.home
+package com.example.basetemplate.ui.main
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.basetemplate.data.model.Users
-import com.example.basetemplate.data.repository.MediaRepository
-import com.example.basetemplate.data.repository.UsersRepository
 import com.example.basetemplate.ui.base.BaseViewModel
 import com.example.basetemplate.util.common.Event
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import okhttp3.internal.Util
-import javax.inject.Inject
 
 class HomeViewModel (networkHelper: NetworkHelper,
                     val compositeDisposable: CompositeDisposable)

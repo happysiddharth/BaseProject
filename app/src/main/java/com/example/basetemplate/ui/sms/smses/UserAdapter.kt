@@ -1,4 +1,4 @@
-package com.example.basetemplate.ui.dashboard.sms
+package com.example.basetemplate.ui.sms.smses
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,4 +15,5 @@ class UserAdapter(private val list:ArrayList<SMS>, parentLifeCycleOwner:Lifecycl
                 .inflate(R.layout.user_list, parent, false)
         )
     }
+
 }

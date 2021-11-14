@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.basetemplate.data.repository.MediaRepository
 import com.example.basetemplate.data.repository.SMSRepository
 import com.example.basetemplate.ui.base.BaseFragment
-import com.example.basetemplate.ui.dashboard.DashboardViewModel
+import com.example.basetemplate.ui.sms.SmsViewModel
 import com.example.basetemplate.ui.gallery.GallaryViewModel
 import com.example.basetemplate.util.ViewModelFactory
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
@@ -29,11 +29,11 @@ class FragmentModule(private val fragment:BaseFragment<*>) {
         networkHelper: NetworkHelper,
         smsRepository: SMSRepository,
         compositeDisposable: CompositeDisposable
-    ):DashboardViewModel =
+    ):SmsViewModel =
         ViewModelProviders.of(fragment,
-        ViewModelFactory(DashboardViewModel::class){
-            DashboardViewModel(networkHelper,fragment.requireActivity(),smsRepository,compositeDisposable)
-        }).get(DashboardViewModel::class.java)
+        ViewModelFactory(SmsViewModel::class){
+            SmsViewModel(networkHelper,fragment.requireActivity(),smsRepository,compositeDisposable)
+        }).get(SmsViewModel::class.java)
 
     @Provides
     fun galleryViewModel(

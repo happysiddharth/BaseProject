@@ -18,7 +18,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_dash"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

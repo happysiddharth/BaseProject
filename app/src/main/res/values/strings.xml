@@ -20,4 +20,5 @@
     <string name="login_button_text">Login</string>
     <string name="search_title">Search</string>
     <string name="search_hint">sms</string>
+    <string name="sms">SMS</string>
 </resources>

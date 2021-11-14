@@ -19,6 +19,7 @@ abstract class BaseItemViewHolder<T:Any,VM:BaseItemViewModel<T>>(
     init {
         onCreate()
     }
+
     @Inject
     lateinit var viewModel:VM
 
@@ -42,14 +43,15 @@ abstract class BaseItemViewHolder<T:Any,VM:BaseItemViewModel<T>>(
         lifeCycleRegistry.markState(Lifecycle.State.STARTED)
         lifeCycleRegistry.markState(Lifecycle.State.RESUMED)
     }
+
     fun onStop(){
         lifeCycleRegistry.markState(Lifecycle.State.STARTED)
         lifeCycleRegistry.markState(Lifecycle.State.CREATED)
     }
+
     fun onDestroy(){
         lifeCycleRegistry.markState(Lifecycle.State.DESTROYED)
     }
-
 
     abstract fun setUpObservers()
 
@@ -61,6 +63,6 @@ abstract class BaseItemViewHolder<T:Any,VM:BaseItemViewModel<T>>(
             .build()
 
     protected abstract fun injectDependencies(viewHolderComponent: ViewHolderComponent)
-    protected abstract fun setUpView(view: View)
 
+    protected abstract fun setUpView(view: View)
 }

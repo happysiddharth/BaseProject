@@ -1,16 +1,17 @@
-package com.example.basetemplate.ui.dashboard.sms
+package com.example.basetemplate.ui.sms.smses
 
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.example.basetemplate.R
 import com.example.basetemplate.data.model.SMS
 import com.example.basetemplate.di.component.ViewHolderComponent
 import com.example.basetemplate.ui.base.BaseActivity
 import com.example.basetemplate.ui.base.BaseItemViewHolder
-import com.example.basetemplate.ui.home.BottomSheet
+import com.example.basetemplate.ui.main.BottomSheet
 import com.example.basetemplate.util.common.Event
 import com.example.basetemplate.util.common.Resource
 import com.example.basetemplate.util.common.Status
@@ -27,12 +28,15 @@ class UserViewHolder(val view: View) : BaseItemViewHolder<SMS, UserItemViewModel
 
     override fun setUpView(view: View) {
         view.findViewById<CardView>(R.id.smsCard).setOnClickListener {
-            viewModel.bottomSheet.postValue(Event(Resource.success(viewModel.data.value!!)))
+            //viewModel.bottomSheet.postValue(Event(Resource.success(viewModel.data.value!!)))
+            viewModel.showToast()
         }
     }
 
     override fun setUpObservers() {
         viewModel.data.observe(this) {
+
+
             view.findViewById<TextView>(R.id.userName).text = it.body
             view.findViewById<TextView>(R.id.sender).text = it.sender
             view.findViewById<TextView>(R.id.time).text = getTimeAgo(Date(it.date!!.toLong()))
@@ -42,6 +46,7 @@ class UserViewHolder(val view: View) : BaseItemViewHolder<SMS, UserItemViewModel
                 view.findViewById<ImageView>(R.id.unread).visibility = View.VISIBLE
 
             }
+
         }
         viewModel.bottomSheet.observe(this) { sms ->
             when (sms.getIfNotHandled()?.status) {

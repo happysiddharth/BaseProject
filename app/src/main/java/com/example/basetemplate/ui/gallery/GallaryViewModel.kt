@@ -5,8 +5,10 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import com.example.basetemplate.data.repository.MediaRepository
+import com.example.basetemplate.data.repository.UsersRepository
 import com.example.basetemplate.ui.base.BaseViewModel
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
@@ -21,14 +23,17 @@ class GallaryViewModel(
     override fun onCreate() {
         compositeDisposable.addAll(
             mediaRepository.getMedia()
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({list->
+                    Log.e("TAG",Thread.currentThread().name)
                     uriList.postValue(list)
                 },
                     {
                         it.printStackTrace()
 
-                    })
+                    }),
         )
     }
+
 }

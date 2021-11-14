@@ -23,7 +23,6 @@ import javax.inject.Singleton
 )
 interface ApplicationComponent {
     fun getNetworkHelper(): NetworkHelper
-    fun getUserRepository(): UsersRepository
     fun getPermissions(): Permissions
     fun getCompositeDisposable(): CompositeDisposable
 

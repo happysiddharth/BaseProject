@@ -1,4 +1,4 @@
-package com.example.basetemplate.ui.home
+package com.example.basetemplate.ui.main
 
 import android.view.View
 import android.widget.TextView

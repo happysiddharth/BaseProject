@@ -10,6 +10,6 @@
         android:label="Gallery" />
     <fragment
         android:id="@+id/dashboard"
-        android:name="com.example.basetemplate.ui.dashboard.Dashboard"
+        android:name="com.example.basetemplate.ui.sms.Sms"
         android:label="Dashboard" />
 </navigation>

@@ -2,11 +2,9 @@ package com.example.basetemplate.di.module
 
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.basetemplate.data.repository.MediaRepository
 import com.example.basetemplate.di.ActivityScope
-import com.example.basetemplate.di.ViewHolderScope
 import com.example.basetemplate.ui.base.BaseActivity
-import com.example.basetemplate.ui.home.HomeViewModel
+import com.example.basetemplate.ui.main.HomeViewModel
 import com.example.basetemplate.util.ViewModelFactory
 import com.mindorks.bootcamp.instagram.utils.network.NetworkHelper
 import dagger.Module

@@ -1,10 +1,8 @@
 package com.example.basetemplate.di.component
 
-import com.example.basetemplate.di.ActivityScope
 import com.example.basetemplate.di.FragmentScope
-import com.example.basetemplate.di.module.ActivityModule
 import com.example.basetemplate.di.module.FragmentModule
-import com.example.basetemplate.ui.dashboard.Dashboard
+import com.example.basetemplate.ui.sms.Sms
 import com.example.basetemplate.ui.gallery.Gallery
 import dagger.Component
 
@@ -18,6 +16,6 @@ import dagger.Component
     ]
 )
 interface FragmentComponent {
-    fun inject(dashboard: Dashboard)
+    fun inject(sms: Sms)
     fun inject(gallery: Gallery)
 }

@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.net.Uri
 import android.provider.Telephony
+import com.example.basetemplate.R
 import com.example.basetemplate.data.model.SMS
 import com.example.basetemplate.util.common.Constant.SMS_CONTENT_PROVIDER
 import com.example.basetemplate.util.common.Permissions
@@ -46,6 +47,7 @@ class SMSRepository @Inject constructor(
                             cursor.getString(4),
                             cursor.getString(5),
                             cursor.getString(6).toIntOrNull(),
+                            R.color.purple_200
                         )
                     )
                 } while (cursor.moveToNext())
@@ -89,6 +91,7 @@ class SMSRepository @Inject constructor(
                             cursor.getString(4),
                             cursor.getString(5),
                             cursor.getString(6).toIntOrNull(),
+                            R.color.purple_500
                         )
                     )
                 } while (cursor.moveToNext())
@@ -134,6 +137,7 @@ class SMSRepository @Inject constructor(
                         cursor.getString(4),
                         cursor.getString(5),
                         cursor.getString(6).toIntOrNull(),
+                        R.color.purple_500
                     )
                 )
             }

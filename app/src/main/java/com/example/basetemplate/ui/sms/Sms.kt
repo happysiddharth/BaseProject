@@ -1,4 +1,4 @@
-package com.example.basetemplate.ui.dashboard
+package com.example.basetemplate.ui.sms
 
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,13 +11,15 @@ import com.example.basetemplate.R
 import com.example.basetemplate.data.model.SMS
 import com.example.basetemplate.di.component.FragmentComponent
 import com.example.basetemplate.ui.base.BaseFragment
-import com.example.basetemplate.ui.dashboard.sms.UserAdapter
-import com.example.basetemplate.ui.home.HomeViewModel
+import com.example.basetemplate.ui.sms.smses.UserAdapter
+import com.example.basetemplate.ui.main.HomeViewModel
+import com.example.basetemplate.util.log.Logger
 import kotlinx.android.synthetic.main.dashboard.*
+import java.lang.Exception
 import javax.inject.Inject
 
 
-class Dashboard : BaseFragment<DashboardViewModel>() {
+class Sms : BaseFragment<SmsViewModel>() {
     private val users = ArrayList<SMS>()
     private lateinit var rv: RecyclerView
     private lateinit var adpater: UserAdapter
@@ -30,11 +32,20 @@ class Dashboard : BaseFragment<DashboardViewModel>() {
     }
 
     private lateinit var homeViewModel: HomeViewModel
+
     override fun setUpView(view: View) {
         rv = view.findViewById(R.id.users)
         adpater = UserAdapter(users, this)
         rv.layoutManager = linearLayoutManager
         rv.adapter = adpater
+        rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+            }
+        })
+
+        Logger.e(TAG,getView().toString())
     }
 
 
@@ -48,7 +59,7 @@ class Dashboard : BaseFragment<DashboardViewModel>() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "SMS"
         val search = menu.findItem(R.id.search)
         val searchView = search.actionView as SearchView
-        searchView.queryHint = "SMS"
+        searchView.queryHint = getString(R.string.sms)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -58,9 +69,7 @@ class Dashboard : BaseFragment<DashboardViewModel>() {
                 viewModel.searchSms(newText.toString())
                 return false
             }
-
         })
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 
